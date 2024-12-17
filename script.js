@@ -24,14 +24,33 @@ console.log(userKm, userAge);
 
 // Sulla base dei dati raccolti nell'INPUT il programma dovrà calcolare il prezzo totale del viaggio (il prezzo del biglietto è di 0,21€ al km).
 function calcolaPrezzo(userKm, userAge) {
+
     // Prezzo per chilometro
     const prezzoPerKm = 0.21;
+
+    // Calcolo del prezzo base del biglietto (senza sconti)
+    let prezzoBase = userKm * prezzoPerKm;
+
+    
+     // Se il passeggero ha meno di 18 anni avrà uno sconto del 20% sul costo totale del biglietto.
+     if (userAge < 18) {
+
+        prezzoBase = prezzoBase * 0,80;
+        
+     }  // Se il passeggero ha più di 65 anni avrà uno sconto del 40% sul costo totale del biglietto. 
+     else if (userAge > 65) {
+
+        prezzoBase = prezzoBase * 0,60;
+
+     }
+
+     let prezzoFinale = prezzoBase.toFixed(2);
+
+     
+
 }
 
-   // Se il passeggero ha meno di 18 anni avrà uno sconto del 20% sul costo totale del biglietto.
+   
    // Se il passeggero ha più di 65 anni avrà uno sconto del 40% sul costo totale del biglietto.
    // Se il passeggero ha un età compresa tra 18 e 65 anni non avrà nessuno sconto sul costo totale del biglietto.
    
-// OUTPUT:
-
-// Esprimere il prezzo finale in forma umana (con massimo due decimali, per indicare centesimi sul prezzo).
