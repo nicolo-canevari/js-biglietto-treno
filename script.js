@@ -1,56 +1,60 @@
-// ESERCIZIO:
-
-// Il programma dovrà chiedere all’utente il numero di chilometri che vuole percorrere e l’età del passeggero. 
-// Sulla base di queste informazioni dovrà calcolare il prezzo totale del viaggio, secondo queste regole:
-// - il prezzo del biglietto è definito in base ai km (0.21 € al km)
-// - va applicato uno sconto del 20% per i minorenni
-// - va applicato uno sconto del 40% per gli over 65.
-// - L’output del prezzo finale va messo fuori in forma umana (con massimo due decimali, per indicare centesimi sul prezzo).
-
-
-// LOGICA:
 
 // INPUT:
-//  Il programma dovrà chiedere all'utente il numero dei chilometri che vuole percorrere.
-let userKm = prompt ("indica il numero di km che vuoi percorrere")
+//  Numero dei chilometri che vuole percorrere il passeggero.
+let userKm = parseFloat(prompt("Indica il numero di km che vuoi percorrere"));
 
-// Il programma dovrà chiedere all'utente l'età del passeggero.
-let userAge = prompt ("indica l'età del passeggero")
+// Età del passeggero.
+let userAge = parseInt(prompt("Indica l'età del passeggero"));
 
 console.log(userKm, userAge);
 
 
 // ELABORAZIONE:
 
-// Sulla base dei dati raccolti nell'INPUT il programma dovrà calcolare il prezzo totale del viaggio (il prezzo del biglietto è di 0,21€ al km).
-function calcolaPrezzo(userKm, userAge) {
+// verifica che i dati siano numeri, se si procedere con il calcolo della tariffa.
 
-    // Prezzo per chilometro
-    const prezzoPerKm = 0.21;
+if (isNaN(userKm) || isNaN(userAge)) {
+    console.log("Errore: uno dei valori immessi non è un numero.");
+    // alert("Errore: uno dei valori immessi non è un numero valido.");
+} else {
 
-    // Calcolo del prezzo base del biglietto (senza sconti)
-    let prezzoBase = userKm * prezzoPerKm;
+    function calcolaPrezzo(userKm, userAge) {
 
-    
-     // Se il passeggero ha meno di 18 anni avrà uno sconto del 20% sul costo totale del biglietto.
-     if (userAge < 18) {
+        // Prezzo per chilometro (COSTANTE)
+        const prezzoPerKm = 0.21;
 
-        prezzoBase = prezzoBase * 0,80;
-        
-     }  // Se il passeggero ha più di 65 anni avrà uno sconto del 40% sul costo totale del biglietto. 
-     else if (userAge > 65) {
+        // Calcolo del prezzo base del biglietto (senza sconti)
+        let prezzoBase = userKm * prezzoPerKm;
 
-        prezzoBase = prezzoBase * 0,60;
 
-     }
+        // Se il passeggero ha meno di 18 anni avrà uno sconto del 20% sul costo totale del biglietto.
+        if (userAge < 18) {
 
-     let prezzoFinale = prezzoBase.toFixed(2);
+            // formula calcolo dello sconto del 20%
+            prezzoBase = prezzoBase - (prezzoBase * 20) / 100;
 
-     
+        }  // Se il passeggero ha più di 65 anni avrà uno sconto del 40% sul costo totale del biglietto. 
+        else if (userAge > 65) {
+
+            // formula calcolo dello sconto del 40%
+            prezzoBase = prezzoBase - (prezzoBase * 40) / 100;
+
+        }
+
+        //  REGOLE DEL PREZZO FINALE
+        // Rendi il prezzo finale con massimo due decimali
+        let prezzoFinale = prezzoBase.toFixed(2);
+
+        // Restituisce il prezzo in forma umana con il simbolo €
+        return `€${prezzoFinale}`;
+
+    }
 
 }
 
-   
-   // Se il passeggero ha più di 65 anni avrà uno sconto del 40% sul costo totale del biglietto.
-   // Se il passeggero ha un età compresa tra 18 e 65 anni non avrà nessuno sconto sul costo totale del biglietto.
-   
+// OUTPUT
+
+// risultato della tariffa di viaggio
+let prezzoTotale = calcolaPrezzo(userKm, userAge);
+console.log("Il prezzo totale del viaggio è: " + prezzoTotale);
+
