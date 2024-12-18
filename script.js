@@ -46,7 +46,7 @@ if (isNaN(userKm) || isNaN(userAge)) {
         let prezzoFinale = prezzoBase.toFixed(2);
 
         // Restituisce il prezzo in forma umana con il simbolo €
-        return `€${prezzoFinale}`;
+        return `${prezzoFinale}€`;
 
     }
 
